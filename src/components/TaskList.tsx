@@ -17,14 +17,16 @@ export function TaskList() {
   function handleCreateNewTask() {
     setNewTaskTitle('');
 
-    return setTasks([
-      ...tasks,
-      {
-        id: Math.round((Math.random() * 100)),
-        title: newTaskTitle,
-        isComplete: false
-      }
-    ])
+    newTaskTitle ? (
+      setTasks([
+        ...tasks,
+        {
+          id: Math.round((Math.random() * 100)),
+          title: newTaskTitle,
+          isComplete: false
+        }
+      ])
+    ) : false;
   }
 
   function handleToggleTaskCompletion(id: number) {
@@ -47,17 +49,11 @@ export function TaskList() {
   }
 
   function handleRemoveTask(id: number) {
-    tasks.map((task) => {
-      if( task.id === id ) {
-        const newArray = tasks.filter( task => task.id !== id );
+    const newArray = tasks.filter( task => task.id !== id );
 
-        return setTasks([
-          ...newArray
-        ])
-      }
-
-      return task
-    })
+    return setTasks([
+      ...newArray
+    ])
   }
 
   return (
